@@ -8,6 +8,8 @@ query = np.random.random((1000,d)).astype(np.float32)
 """
 data = np.random.random((n_data,d)).astype(np.float32)
 index = faiss.index_factory(d, "IVF64,PQ64")
+# IVF: partitioning the index into clusters and limiting the search to only a few clusters.
+# PQ: compress the vectors by partitioning the vector into smaller subvectors, perform k-means clustering, and use the centroids of these clusters to represent the vectors. 
 index.train(data)
 index.add(data)
 faiss.write_index(index,"index.bin")
